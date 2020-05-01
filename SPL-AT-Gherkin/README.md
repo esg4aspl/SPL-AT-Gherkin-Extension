@@ -12,7 +12,7 @@ git clone https://github.com/esg4aspl/SPL-AT-Gherkin-Extension.git
 
 ## Usage
 After cloning the repository, you can extract jar file from maven project. Then, you can generate Test classes, Page classes and testng.xml files automatically with it.
-Feature files which are written in SPL-AT-Gherkin language should be prepared before.
+Feature files which are written in SPL-AT-Gherkin language should be prepared before. Jar file which is located on out/artifacts/SPL_AT_Gherkin_jar also could be used for generation. 
 
 :exclamation: Note : Please ensure that all bash scripts are located on same line. 
 
