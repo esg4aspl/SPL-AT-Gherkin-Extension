@@ -10,7 +10,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:spl-at-gherkin-vscode.helloWorld"
+		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -31,7 +31,7 @@
 				},
 				{
 					"id": "code-explorer",
-					"name": "Code"
+					"name": "Codes"
 				}
 			]
 		},
@@ -39,8 +39,31 @@
 			{
 				"command": "spl-at-gherkin-vscode.helloWorld",
 				"title": "Hello World"
+			},
+			{
+				"command": "spl-at-gherkin-vscode.helloWorld",
+				"title": "Refresh",
+				"icon": "$(refresh)"
+			},
+			{
+				"command": "spl-at-gherkin-vscode.helloWorldForGeneration",
+				"title": "Generate",
+				"icon": "$(run-all)"
 			}
-		]
+		],
+		"menus": {
+			"view/title": [
+			  {
+				"command": "spl-at-gherkin-vscode.helloWorld",
+				"group": "navigation"
+			  },
+			  {
+				"command": "spl-at-gherkin-vscode.helloWorldForGeneration",
+				"when": "view == feature-explorer",
+				"group": "navigation"
+			  }
+			]
+		  }
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

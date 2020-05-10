@@ -1,6 +1,8 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { FeatureProvider } from './featureProvider';
+import { CodeProvider } from './codeProvider';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -19,6 +21,15 @@ export function activate(context: vscode.ExtensionContext) {
 		// Display a message box to the user
 		vscode.window.showInformationMessage('Hello World from SPL-AT-Gherkin-VSCode!');
 	});
+
+
+	const featureProvider = new FeatureProvider();
+	const codeProvider = new CodeProvider();
+
+	vscode.window.registerTreeDataProvider("feature-explorer", featureProvider);
+	vscode.window.registerTreeDataProvider("code-explorer", codeProvider);
+	
+	console.log("foo");
 
 	context.subscriptions.push(disposable);
 }
