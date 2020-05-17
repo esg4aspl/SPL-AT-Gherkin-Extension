@@ -23,13 +23,16 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 
-	const featureProvider = new FeatureProvider();
-	const codeProvider = new CodeProvider();
+	const featureProvider = new FeatureProvider(vscode.workspace.rootPath);
+	const codeProvider = new CodeProvider(vscode.workspace.rootPath);
 
 	vscode.window.registerTreeDataProvider("feature-explorer", featureProvider);
+	vscode.commands.registerCommand("feature-explorer.refresh", () => featureProvider.refresh());
+	vscode.commands.registerCommand("feature-explorer.generateCode", () => featureProvider.generateCodeFiles());
+
 	vscode.window.registerTreeDataProvider("code-explorer", codeProvider);
-	
-	console.log("foo");
+	vscode.commands.registerCommand("code-explorer.refresh", () => codeProvider.refresh());
+
 
 	context.subscriptions.push(disposable);
 }

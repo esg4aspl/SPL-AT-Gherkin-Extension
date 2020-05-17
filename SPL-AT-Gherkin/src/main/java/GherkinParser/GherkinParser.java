@@ -38,7 +38,7 @@ public class GherkinParser {
 					new FileInputStream(fPath), "UTF-8"));
 		} catch (FileNotFoundException e) {
 			System.out.println("Main file not found");
-			// e.printStackTrace();
+			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (RuntimeException e) {
@@ -60,7 +60,7 @@ public class GherkinParser {
 		formatter.close();
 
 		Gson gson = new Gson();
-		
+
 		Main[] main =  gson.fromJson(json.toString(), Main[].class);
 
 		long endTime = System.currentTimeMillis();

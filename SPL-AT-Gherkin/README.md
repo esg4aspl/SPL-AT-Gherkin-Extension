@@ -18,17 +18,17 @@ Feature files which are written in SPL-AT-Gherkin language should be prepared be
 
 ```bash
 java -cp SPL-AT-Gherkin.jar GherkinParser.MainProgram
-    PATH_OF_Feature_DIRECTORY
-    PATH_OF_Test_DIRECTORY
-    PATH_OF_Page_DIRECTORY
-    PATH_OF_XML_DIRECTORY
+    /Users/XXX/Desktop/sample/Feature/
+    /Users/XXX/Desktop/sample/Test/
+    /Users/XXX/Desktop/sample/Page/
+    /Users/XXX/Desktop/sample/XML/
 ```
 When generation is done successfully, information message is going to be appeared on console.
 ```bash
 Test classes, page classes and testng xml files are generated successfully.
-Test Classes path is PATH_OF_Test_DIRECTORY
-Page Classes path is PATH_OF_Page_DIRECTORY
-testng xml file path is PATH_OF_XML_DIRECTORY
+Test Classes path is /Users/XXX/Desktop/sample/Test/
+Page Classes path is /Users/XXX/Desktop/sample/Page/
+testng xml file path is /Users/XXX/Desktop/sample/XML/
 ```
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
