@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { isMavenProject } from './utilities';
 import * as fs from 'fs';
 import { setPageDirectoryPath, setTestDirectoryPath, setXMLDirectoryPath, pageDirectoryPath, testDirectoryPath, xmlDirectoryPath } from './global';
 
@@ -10,19 +9,29 @@ export class CodeProvider implements vscode.TreeDataProvider<Code>{
 
     readonly onDidChangeTreeData: vscode.Event<Code | undefined> = this._onDidChangeTreeData.event;
 
+    private isConfigDone : boolean = false;
+
     refresh(): void {
         this._onDidChangeTreeData.fire(undefined);
         vscode.window.showInformationMessage("Code files are refreshed.");
     } 
 
     constructor(private workspaceRoot: string | undefined){
-        if(isMavenProject(workspaceRoot)){
-
+        const config = vscode.workspace.getConfiguration('spl-at-gherkin-vscode');
+        if(!config.get("pagePath")){
+            vscode.window.showErrorMessage("Please enter Page directory path from settings.");
+        }
+        if(!config.get("testPath")){
+            vscode.window.showErrorMessage("Please enter Test directory path from settings.");
+        }
+        if(!config.get("XMLPath")){
+            vscode.window.showErrorMessage("Please enter XML directory path from settings.");
         }
         else {
-            setPageDirectoryPath(this.workspaceRoot + "/" + "Page");
-            setTestDirectoryPath(this.workspaceRoot + "/" + "Test");
-            setXMLDirectoryPath(this.workspaceRoot + "/" + "XML");
+            this.isConfigDone = true;
+            setPageDirectoryPath(String(config.get("pagePath")));
+            setTestDirectoryPath(String(config.get("testPath")));
+            setXMLDirectoryPath(String(config.get("XMLPath")));
         }
         
     }
@@ -32,29 +41,23 @@ export class CodeProvider implements vscode.TreeDataProvider<Code>{
     }
 
     getChildren(element?: Code | undefined): vscode.ProviderResult<Code[]> {
-        if(!this.workspaceRoot){
-            vscode.window.showErrorMessage('Cannot show generated code, a folder should be opened following File>Open path');
-			return Promise.resolve([]);
-        }
-        if(isMavenProject(this.workspaceRoot)){
-
-        }
-        else{
-            //read generated code from current root path.
-            if(!element){
-                return Promise.resolve(this.getCodeDirectoriesFromPath());
-            }
-            if(element.codeType ===  CodeType.Page && element.contextValue === "code"){
-                return Promise.resolve(this.getCodeFiles(pageDirectoryPath,element.codeType));
-            }
-            if(element.codeType === CodeType.Test && element.contextValue === "code"){
-                return Promise.resolve(this.getCodeFiles(testDirectoryPath, element.codeType));
-            }
-            if(element.codeType === CodeType.XML && element.contextValue === "code"){
-                return Promise.resolve(this.getCodeFiles(xmlDirectoryPath, element.codeType));
-            }
+        if(!this.isConfigDone){
             return Promise.resolve([]);
         }
+        //read generated code from current root path.
+        if(!element){
+            return Promise.resolve(this.getCodeDirectoriesFromPath());
+        }
+        if(element.codeType ===  CodeType.Page && element.contextValue === "code"){
+            return Promise.resolve(this.getCodeFiles(pageDirectoryPath,element.codeType));
+        }
+        if(element.codeType === CodeType.Test && element.contextValue === "code"){
+            return Promise.resolve(this.getCodeFiles(testDirectoryPath, element.codeType));
+        }
+        if(element.codeType === CodeType.XML && element.contextValue === "code"){
+            return Promise.resolve(this.getCodeFiles(xmlDirectoryPath, element.codeType));
+        }
+        return Promise.resolve([]);
     }
 
     /**
@@ -65,7 +68,7 @@ export class CodeProvider implements vscode.TreeDataProvider<Code>{
     getCodeFiles(dirPath: string, codeType:CodeType) : TestCode[] | PageCode[] | XMLCode[]{
         const absoluteDirectoryPath = dirPath;
         if(!fs.existsSync(absoluteDirectoryPath)){
-            vscode.window.showInformationMessage("There is no folder in current root path.");
+            vscode.window.showInformationMessage("There is no folder for given path. Path is " + dirPath);
             return [];
         }
 
@@ -74,15 +77,33 @@ export class CodeProvider implements vscode.TreeDataProvider<Code>{
         if(codeType === CodeType.XML){
             return files
             .filter(file => path.extname(file) === ".xml")
-            .map(file => new XMLCode(file, vscode.TreeItemCollapsibleState.None));
+            .map(file => new XMLCode(file, 
+                vscode.TreeItemCollapsibleState.None,
+                {
+                    command: 'spl-at-gherkin-vscode.openEditor',
+                    title: '',
+                    arguments: [(dirPath + "/" + file)]
+                }));
         }
         else {
             files = files.filter(file => path.extname(file) === ".java");
             if(codeType === CodeType.Page){
-                return files.map(file => new PageCode(file, vscode.TreeItemCollapsibleState.None));
+                return files.map(file => new PageCode(file, 
+                    vscode.TreeItemCollapsibleState.None,
+                    {
+                        command: 'spl-at-gherkin-vscode.openEditor',
+                        title: '',
+                        arguments: [(dirPath + "/" + file)]
+                    }));
             }
             else {
-                return files.map(file => new TestCode(file, vscode.TreeItemCollapsibleState.None));
+                return files.map(file => new TestCode(file, 
+                    vscode.TreeItemCollapsibleState.None,
+                    {
+                        command: 'spl-at-gherkin-vscode.openEditor',
+                        title: '',
+                        arguments: [(dirPath + "/" + file)]
+                    }));
             }
         }
     }
@@ -95,13 +116,13 @@ export class CodeProvider implements vscode.TreeDataProvider<Code>{
         const absoluteTestPath = testDirectoryPath;
         const absoluteXMLPath = xmlDirectoryPath;
         if(!fs.existsSync(absolutePagePath)){
-            vscode.window.showInformationMessage("There is no Page folder in current root path.");
+            vscode.window.showInformationMessage("There is no Page folder from given path. Path is " + absolutePagePath);
         }
         if(!fs.existsSync(absoluteXMLPath)){
-            vscode.window.showInformationMessage("There is no XML folder in current root path.");
+            vscode.window.showInformationMessage("There is no XML folder from given path. Path is " + absoluteXMLPath);
         }
         if(!fs.existsSync(absoluteTestPath)){
-            vscode.window.showInformationMessage("There is no Test folder in current root path.");
+            vscode.window.showInformationMessage("There is no Test folder from given path. Path is " + absoluteTestPath);
             return [];
         }
         return [
@@ -121,7 +142,8 @@ export class Code extends vscode.TreeItem{
     constructor(
         codeType : CodeType,
 		public readonly label: string,
-        public readonly collapsibleState: vscode.TreeItemCollapsibleState) {
+        public readonly collapsibleState: vscode.TreeItemCollapsibleState,
+        public readonly command?: vscode.Command) {
         super(label, collapsibleState);
         this.codeType_ = codeType;
     }
@@ -141,8 +163,9 @@ export class Code extends vscode.TreeItem{
 export class PageCode extends Code{
     constructor(
 		public readonly label: string,
-		public readonly collapsibleState: vscode.TreeItemCollapsibleState) {
-		super(CodeType.Page,label, collapsibleState);
+		public readonly collapsibleState: vscode.TreeItemCollapsibleState,
+        public readonly command?: vscode.Command) {
+		super(CodeType.Page,label, collapsibleState,command);
     }
 
     iconPath = {
@@ -156,8 +179,9 @@ export class PageCode extends Code{
 export class TestCode extends Code{
     constructor(
 		public readonly label: string,
-		public readonly collapsibleState: vscode.TreeItemCollapsibleState) {
-		super(CodeType.Test,label, collapsibleState);
+		public readonly collapsibleState: vscode.TreeItemCollapsibleState,
+        public readonly command?: vscode.Command) {
+		super(CodeType.Test,label, collapsibleState,command);
     }
 
     iconPath = {
@@ -171,8 +195,9 @@ export class TestCode extends Code{
 export class XMLCode extends Code{
     constructor(
 		public readonly label: string,
-		public readonly collapsibleState: vscode.TreeItemCollapsibleState) {
-		super(CodeType.Test,label, collapsibleState);
+		public readonly collapsibleState: vscode.TreeItemCollapsibleState,
+        public readonly command?: vscode.Command) {
+		super(CodeType.Test,label, collapsibleState,command);
     }
 
     iconPath = {

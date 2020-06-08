@@ -3,6 +3,7 @@
 import * as vscode from 'vscode';
 import { FeatureProvider } from './featureProvider';
 import { CodeProvider } from './codeProvider';
+import { FeatureEditorProvider } from './featureEditorProvider';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -33,7 +34,13 @@ export function activate(context: vscode.ExtensionContext) {
 	vscode.window.registerTreeDataProvider("code-explorer", codeProvider);
 	vscode.commands.registerCommand("code-explorer.refresh", () => codeProvider.refresh());
 
+	vscode.commands.registerCommand("spl-at-gherkin-vscode.openEditor", filePath => {
+		vscode.commands.executeCommand('vscode.open', 
+		vscode.Uri.parse(filePath));
+	});
 
+	const config = vscode.workspace.getConfiguration('spl-at-gherkin-vscode');
+	//context.subscriptions.push(FeatureEditorProvider.register(context));
 	context.subscriptions.push(disposable);
 }
 

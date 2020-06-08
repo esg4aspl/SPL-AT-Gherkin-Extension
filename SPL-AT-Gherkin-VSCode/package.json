@@ -14,6 +14,37 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"configuration":[
+			{
+				"title": "SPL-AT Gherkin",
+				"properties": {
+					"spl-at-gherkin-vscode.featurePath" : {
+						"description": "Please enter Feature directory path that includes feature files which are written in SPL-AT Gherkin. \n Example : /Users/username/projectFolder/featureFolder/",
+                    	"type": "string",
+						"required": true,
+						"default":""
+					},
+					"spl-at-gherkin-vscode.pagePath" : {
+						"description": "Please enter Page directory path that includes auto-generated page classes. \n Example : /Users/username/projectFolder/pageFolder/",
+                    	"type": "string",
+						"required": true,
+						"default":""
+					},
+					"spl-at-gherkin-vscode.testPath" : {
+						"description": "Please enter Test directory path that includes auto-generated test classes. \n Example : /Users/username/projectFolder/testFolder/",
+                    	"type": "string",
+                    	"required": true,
+						"default":""
+					},
+					"spl-at-gherkin-vscode.XMLPath" : {
+						"description": "Please enter directory of testng.xml path. \n Example : /Users/username/projectFolder/testngXMLFolder/",
+                    	"type": "string",
+                    	"required": true,
+						"default":""
+					}
+				}
+			}
+		],
 		"viewsContainers": {
 			"activitybar": [
 				{
@@ -54,6 +85,10 @@
 				"command": "feature-explorer.generateCode",
 				"title": "Generate Code",
 				"icon": "$(run-all)"
+			},
+			{
+				"command": "spl-at-gherkin-vscode.openEditor",
+				"title": "Open"
 			}
 		],
 		"menus": {

@@ -1,22 +1,27 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { isMavenProject } from './utilities';
 import { featureDirectoryPath , setFeatureDirectoryPath, testDirectoryPath, pageDirectoryPath, xmlDirectoryPath } from './global';
 import * as fs from 'fs';
 
 export class FeatureProvider implements vscode.TreeDataProvider<Feature>{
     
-    constructor(private workspaceRoot: string | undefined) {
-        if(isMavenProject(workspaceRoot)){
-            //TODO:
-        }else {
-            setFeatureDirectoryPath(workspaceRoot + "/Feature");
-        }
-    }
-    
     private _onDidChangeTreeData: vscode.EventEmitter<Feature | undefined> = new vscode.EventEmitter<Feature | undefined>();
 
     readonly onDidChangeTreeData: vscode.Event<Feature | undefined> = this._onDidChangeTreeData.event;
+
+    private isConfigDone : boolean = false;
+
+    constructor(private workspaceRoot: string | undefined) {
+        const config = vscode.workspace.getConfiguration('spl-at-gherkin-vscode');
+        if(!config.get("featurePath")){
+            vscode.window.showErrorMessage("Please enter Feature directory path from settings.");
+            return;
+        }else {
+            this.isConfigDone = true;
+            setFeatureDirectoryPath(String(config.get("featurePath")));
+        }
+    }
+    
 
     refresh(): void {
         this._onDidChangeTreeData.fire(undefined);
@@ -28,9 +33,8 @@ export class FeatureProvider implements vscode.TreeDataProvider<Feature>{
     }
 
     getChildren(element?: Feature | undefined): vscode.ProviderResult<Feature[]> {
-        if(!this.workspaceRoot){
-            vscode.window.showErrorMessage('Cannot show feature files, a folder should be opened following File>Open path');
-			return Promise.resolve([]);
+        if(!this.isConfigDone){
+            return Promise.resolve([]);
         }
         if(!element){
             return Promise.resolve(this.getFeaturesFromPath());
@@ -43,12 +47,18 @@ export class FeatureProvider implements vscode.TreeDataProvider<Feature>{
      */
     private getFeaturesFromPath() : Feature[]{
         if(!fs.existsSync(featureDirectoryPath)){
-            vscode.window.showErrorMessage("Feature folder does not exist from opened folder.");
+            vscode.window.showErrorMessage("Feature folder does not exist from given path. Path is " + featureDirectoryPath);
             return [];
         }
         return fs.readdirSync(featureDirectoryPath)
         .filter(file => path.extname(file) === ".feature")
-        .map(file => new Feature(file, vscode.TreeItemCollapsibleState.None));
+        .map(file => new Feature(file, 
+            vscode.TreeItemCollapsibleState.None,
+            {
+                command: 'spl-at-gherkin-vscode.openEditor',
+                title: '',
+                arguments: [(featureDirectoryPath + "/" + file)]
+            }));
     }
 
     generateCodeFiles(){
@@ -84,7 +94,8 @@ export class FeatureProvider implements vscode.TreeDataProvider<Feature>{
 export class Feature extends vscode.TreeItem{ 
     constructor(
 		public readonly label: string,
-		public readonly collapsibleState: vscode.TreeItemCollapsibleState) {
+        public readonly collapsibleState: vscode.TreeItemCollapsibleState,
+        public readonly command?: vscode.Command) {
 		super(label, collapsibleState);
     }
 
