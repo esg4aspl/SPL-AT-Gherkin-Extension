@@ -109,7 +109,24 @@
 					"group": "navigation"
 				}
 			]
-		}
+		},
+		"languages": [
+            {
+                "id": "feature",
+                "aliases": [
+                    "feature",
+                    "feature"
+                ],
+                "extensions": [
+                    ".feature"
+                ]
+            }
+        ],
+		"grammars": [{
+            "language": "feature",
+            "scopeName": "source.feature",
+            "path": "./syntaxes/feature.tmLanguage.json"
+        }]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

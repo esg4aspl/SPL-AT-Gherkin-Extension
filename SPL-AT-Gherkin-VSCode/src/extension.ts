@@ -40,8 +40,9 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	const config = vscode.workspace.getConfiguration('spl-at-gherkin-vscode');
-	//context.subscriptions.push(FeatureEditorProvider.register(context));
+	
 	context.subscriptions.push(disposable);
+
 }
 
 // this method is called when your extension is deactivated
