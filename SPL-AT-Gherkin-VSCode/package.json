@@ -68,8 +68,8 @@
 		},
 		"commands": [
 			{
-				"command": "spl-at-gherkin-vscode.helloWorld",
-				"title": "Hello World"
+				"command": "spl-at-gherkin-vscode.createNewFeature",
+				"title": "New Feature"
 			},
 			{
 				"command": "feature-explorer.refresh",
