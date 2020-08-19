@@ -14,7 +14,11 @@ export class CodeProvider implements vscode.TreeDataProvider<Code>{
     refresh(): void {
         this._onDidChangeTreeData.fire(undefined);
         vscode.window.showInformationMessage("Code files are refreshed.");
-    } 
+    }
+    
+    execute():void{
+        
+    }
 
     constructor(private workspaceRoot: string | undefined){
         const config = vscode.workspace.getConfiguration('spl-at-gherkin-vscode');

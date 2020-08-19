@@ -36,7 +36,7 @@ public class BasePageClassGenerator extends ClassFileGenerator{
 	 */
 	@Override
 	protected String createClassSkelaton(String className){	
-		return "package Pages;\n"
+		return "package pages;\n"
 				+ "import org.openqa.selenium.support.ui.WebDriverWait;\n"
 				+ "import io.appium.java_client.android.AndroidDriver;\n"
 				
@@ -205,4 +205,71 @@ public class BasePageClassGenerator extends ClassFileGenerator{
 		}
 		return null;
 	}
+
+	public void createBasePageClass() {
+		String basePageFileName = "BasePage.java";
+		if (isFileExist(basePageFileName)){
+			return;
+		}
+		String overAllClassContentAfterTextView = "package pages;\n" +
+				"\n" +
+				"import org.openqa.selenium.By;\n" +
+				"import org.openqa.selenium.support.ui.WebDriverWait;\n" +
+				"\n" +
+				"import io.appium.java_client.android.AndroidDriver;\n" +
+				"\n" +
+				"public class BasePage \n" +
+				"{\n" +
+				"\t\n" +
+				"\tpublic AndroidDriver driver;\n" +
+				"\tpublic WebDriverWait wait;\n" +
+				"\t\n" +
+				"\tpublic BasePage(AndroidDriver driver,WebDriverWait wait)\n" +
+				"\t{\n" +
+				"\t\tthis.driver = driver;\n" +
+				"\t\tthis.wait = wait;\n" +
+				"\t}\n" +
+				"\t\n" +
+				"\tprotected void click(String identifier)\n" +
+				"\t{\n" +
+				"\t\tdriver.findElement(By.id(identifier)).click();\n" +
+				"\t}\n" +
+				"\t\n" +
+				"\tprotected void setText(String identifier, String text)\n" +
+				"\t{\n" +
+				"\t\tdriver.findElement(By.id(identifier)).clear();\n" +
+				"\t\tdriver.findElement(By.id(identifier)).sendKeys(text);\n" +
+				"\t}\n" +
+				"\t\n" +
+				"\tprotected String getText(String identifier)\n" +
+				"\t{\n" +
+				"\t\treturn driver.findElement(By.id(identifier)).getText();\n" +
+				"\t}\n" +
+				"\t\n" +
+				"\tprotected boolean isEnable(String identifier){\n" +
+				"\t\treturn driver.findElement(By.id(identifier)).isEnabled();\n" +
+				"\t}\n" +
+				"\t\n" +
+				"\tpublic boolean isShown(String identifier){\n" +
+				"\t\treturn driver.findElement(By.id(identifier)).isDisplayed();\n" +
+				"\t}\n" +
+				"\t\n" +
+				"\tpublic AndroidDriver getDriver() {\n" +
+				"\t\treturn driver;\n" +
+				"\t}\n" +
+				"\t\n" +
+				"\tpublic WebDriverWait getWait() {\n" +
+				"\t\treturn wait;\n" +
+				"\t}\n" +
+				"}\n";
+		try {
+			super.writeToFile(basePageFileName,
+					overAllClassContentAfterTextView);
+
+		}catch (Exception e){
+			System.out.println(e.toString());
+		}
+	}
+
+
 }

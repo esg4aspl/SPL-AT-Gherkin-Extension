@@ -72,6 +72,10 @@
 				"title": "New Feature"
 			},
 			{
+				"command": "spl-at-gherkin-vscode.deleteFeature",
+				"title": "Delete Feature"
+			},
+			{
 				"command": "feature-explorer.refresh",
 				"title": "Refresh",
 				"icon": "$(refresh)"
@@ -89,6 +93,11 @@
 			{
 				"command": "spl-at-gherkin-vscode.openEditor",
 				"title": "Open"
+			},
+			{
+				"command": "code-explorer.executeCode",
+				"title": "Execute",
+				"icon": "$(run-all)"
 			}
 		],
 		"menus": {

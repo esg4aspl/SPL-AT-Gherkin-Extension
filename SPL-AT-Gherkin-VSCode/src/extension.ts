@@ -3,7 +3,7 @@
 import * as vscode from 'vscode';
 import { FeatureProvider } from './featureProvider';
 import { CodeProvider } from './codeProvider';
-import {createNewFeatureFromInputBox} from './featureInput';
+import {createNewFeatureFromInputBox, deleteFeatureFromInputBox} from './featureInput';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -24,6 +24,10 @@ export function activate(context: vscode.ExtensionContext) {
 		createNewFeatureFromInputBox(vscode.workspace.getConfiguration('spl-at-gherkin-vscode'));
 	});
 
+	vscode.commands.registerCommand('spl-at-gherkin-vscode.deleteFeature', () => {
+		deleteFeatureFromInputBox(vscode.workspace.getConfiguration('spl-at-gherkin-vscode'));
+	});
+
 	const featureProvider = new FeatureProvider(vscode.workspace.rootPath);
 	const codeProvider = new CodeProvider(vscode.workspace.rootPath);
 
@@ -33,6 +37,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	vscode.window.registerTreeDataProvider("code-explorer", codeProvider);
 	vscode.commands.registerCommand("code-explorer.refresh", () => codeProvider.refresh());
+	vscode.commands.registerCommand("code-explorer.executeCode", () => codeProvider.execute());
 
 	vscode.commands.registerCommand("spl-at-gherkin-vscode.openEditor", filePath => {
 		vscode.commands.executeCommand('vscode.open', 

@@ -40,10 +40,10 @@ public class TestNGClassGenerator extends ClassFileGenerator{
 	@Override
 	protected String createClassSkelaton(String className) {
 		// TODO Auto-generated method stub
-		return "package Tests;\n"
+		return "package tests;\n"
 				+ "import org.testng.Assert;\n"
 				+ "import org.testng.annotations.Test;\n"
-				+ "import Pages.*;\n"
+				+ "import pages.*;\n"
 				+ "import static org.testng.Assert.assertEquals;\n"
 				+ "import org.testng.annotations.Parameters;\n"
 				+ "import static org.testng.Assert.assertTrue;\n"
@@ -224,9 +224,6 @@ public class TestNGClassGenerator extends ClassFileGenerator{
 				return "\t\tWaitForUI();";
 			}
 		}
-		
-		
-		
 		return "";
 	}
 
@@ -235,5 +232,51 @@ public class TestNGClassGenerator extends ClassFileGenerator{
 		return ""+annotationContent + "\n" + 
 		super.createMethod("void",methodName,methodContent, methodParameter);
 		
+	}
+
+	public void createBaseTestClass(){
+		String baseTestFileName = "BaseTestNG.java";
+		if (isFileExist(baseTestFileName)){
+			return;
+		}
+		String overAllClassContentAfterTextView = "package tests;\n" +
+				"\n" +
+				"import org.openqa.selenium.support.ui.WebDriverWait;\n" +
+				"import org.testng.annotations.AfterClass;\n" +
+				"import org.testng.annotations.BeforeClass;\n" +
+				"\n" +
+				"import io.appium.java_client.android.AndroidDriver;" +
+				"public class BaseTestNG {\n" +
+				"\n" +
+				"\tpublic AndroidDriver driver;\n" +
+				"\tpublic WebDriverWait wait;\n" +
+				"\t\n" +
+				"\t@BeforeClass\n" +
+				"\tpublic void setup() throws InterruptedException\n" +
+				"\t{\n" +
+				"\t\t//Appium driver configurations here.\n" +
+				"\t\t\n" +
+				"\t}\n" +
+				"\t\n" +
+				"\t@AfterClass\n" +
+				"\tpublic void teardown() \n" +
+				"\t{\n" +
+				"\t\tdriver.quit();\n" +
+				"\t}\n" +
+				"\t\n" +
+				"\tpublic void WaitForUI() throws InterruptedException{\n" +
+				"\t\tsynchronized (wait)\n" +
+				"\t\t{\n" +
+				"\t\t\twait.wait(10000);\n" +
+				"\t\t}\n" +
+				"\t}\n" +
+				"}";
+		try {
+			super.writeToFile(baseTestFileName,
+					overAllClassContentAfterTextView);
+
+		}catch (Exception e){
+			System.out.println(e.toString());
+		}
 	}
 }

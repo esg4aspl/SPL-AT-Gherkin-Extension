@@ -74,7 +74,7 @@ public class TestNGXMLFileGenerator extends XMLFileGenerator{
 				}
 				
 				parametersValueTagAsString += "\t<classes>\n"
-						+ "\t\t<class name=\"Tests." + element.getName() + "\">"
+						+ "\t\t<class name=\"tests." + element.getName() + "\">"
 						+ "</class>\n"
 						+ "\t</classes>\n";
 				
