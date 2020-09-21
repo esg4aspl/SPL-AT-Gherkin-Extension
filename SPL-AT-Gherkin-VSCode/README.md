@@ -4,10 +4,10 @@ You can create your maven test automation project for mobile applications based 
 
 ## How to Configure Maven Project to Tomato
 You have to configure following paths
-* Feature directory path that includes feature files which are written in cherry language.<br/>Example : /Users/username/projectFolder/featureFolder/
-* Page directory path that includes auto-generated page classes.<br/>Example : /Users/username/projectFolder/pageFolder/
-* Test directory path that includes auto-generated test classes.<br/>Example : /Users/username/projectFolder/testFolder/
-* Directory of testng.xml path.<br/>Example : /Users/username/projectFolder/testngXMLFolder/
+* Feature directory path that includes feature files which are written in cherry language.<br/>Example : **/Users/username/projectFolder/featureFolder/**
+* Page directory path that includes auto-generated page classes.<br/>Example : **/Users/username/projectFolder/pageFolder/**
+* Test directory path that includes auto-generated test classes.<br/>Example : **/Users/username/projectFolder/testFolder/**
+* Directory of testng.xml path.<br/>Example : **/Users/username/projectFolder/testngXMLFolder/**
 
 ![](resources/gif/how_to_configure_tomato_2.gif)
 
