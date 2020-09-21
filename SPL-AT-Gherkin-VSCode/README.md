@@ -1,7 +1,4 @@
-# tomato README
-
-<img width="60px" height="60px" src="media/tomato-color.svg" />
-
+# tomato README <img width="60px" height="60px" src="media/tomato-color.svg" />
 
 You can create your maven test automation project for mobile applications based on feature files which are written in cherry language. 
 
