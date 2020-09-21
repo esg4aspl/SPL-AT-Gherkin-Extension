@@ -1,7 +1,7 @@
 {
-	"name": "spl-at-gherkin-vscode",
-	"displayName": "SPL-AT-Gherkin-VSCode",
-	"description": "VSCode extension for SPL-AT-Gherkin",
+	"name": "tomato",
+	"displayName": "tomato",
+	"description": "VSCode extension for tomato",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.44.0"
@@ -16,10 +16,10 @@
 	"contributes": {
 		"configuration":[
 			{
-				"title": "SPL-AT Gherkin",
+				"title": "tomato",
 				"properties": {
 					"spl-at-gherkin-vscode.featurePath" : {
-						"description": "Please enter Feature directory path that includes feature files which are written in SPL-AT Gherkin. \n Example : /Users/username/projectFolder/featureFolder/",
+						"description": "Please enter Feature directory path that includes feature files which are written in cherry. \n Example : /Users/username/projectFolder/featureFolder/",
                     	"type": "string",
 						"required": true,
 						"default":""
@@ -49,8 +49,8 @@
 			"activitybar": [
 				{
 					"id": "package-explorer",
-					"title": "SPL AT Gherkin",
-					"icon": "media/spl-at-gherkin.svg"
+					"title": "tomato",
+					"icon": "media/tomato.svg"
 				}
 			]
 		},

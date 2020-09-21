@@ -100,8 +100,8 @@ export class Feature extends vscode.TreeItem{
     }
 
     iconPath = {
-		light: path.join(__filename, '..', '..', 'resources', 'light', 'file_type_cucumber.svg'),
-		dark: path.join(__filename, '..', '..', 'resources', 'dark', 'file_type_cucumber.svg')
+		light: path.join(__filename, '..', '..', 'resources', 'light', 'cherry.svg'),
+		dark: path.join(__filename, '..', '..', 'resources', 'dark', 'cherry.svg')
 	};
 
 	contextValue = 'feature';
