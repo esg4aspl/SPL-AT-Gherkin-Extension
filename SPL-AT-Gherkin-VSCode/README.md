@@ -36,5 +36,3 @@ Initial release of Tomato
 Instagram Android 
 
 
-
-**Enjoy!**
