@@ -2,6 +2,9 @@
 
 cherry is a domain specific language which is typed Given-When-Then style like [Gherkin](https://cucumber.io/docs/gherkin/). 
 
+## How to use cherry language?
+Please check [wiki](https://github.com/esg4aspl/SPL-AT-Gherkin-Extension/wiki "cherry") page to understand language and its fatures in detail.
+
 ## Installation
 
 You can clone the repository.
