@@ -1,6 +1,6 @@
-# SPL-AT-Gherkin
+# cherry README <img width="60px" height="60px" src="https://github.com/esg4aspl/SPL-AT-Gherkin-Extension/blob/master/SPL-AT-Gherkin-VSCode/resources/light/cherry.svg" />
 
-SPL-AT-Gherkin is a domain specific language which is patched from [Gherkin](https://cucumber.io/docs/gherkin/). 
+cherry is a domain specific language which is typed Given-When-Then style like [Gherkin](https://cucumber.io/docs/gherkin/). 
 
 ## Installation
 
@@ -12,7 +12,7 @@ git clone https://github.com/esg4aspl/SPL-AT-Gherkin-Extension.git
 
 ## Usage
 After cloning the repository, you can extract jar file from maven project. Then, you can generate Test classes, Page classes and testng.xml files automatically with it.
-Feature files which are written in SPL-AT-Gherkin language should be prepared before. Jar file which is located on out/artifacts/SPL_AT_Gherkin_jar also could be used for generation. 
+Feature files which are written in cherry language should be prepared before. Jar file which is located on out/artifacts/SPL_AT_Gherkin_jar also could be used for generation. 
 
 :exclamation: Note : Please ensure that all bash scripts are located on same line. 
 
