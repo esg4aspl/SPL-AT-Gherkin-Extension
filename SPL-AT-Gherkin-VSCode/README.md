@@ -3,7 +3,7 @@
 tomato is a VSCode extension. You can create your maven test automation project for mobile applications based on feature files which are written in [cherry](https://github.com/esg4aspl/SPL-AT-Gherkin-Extension/tree/master/SPL-AT-Gherkin "cherry")  language.
 
 ## How to Configure Maven Project to Tomato
-You have to configure following paths
+Firstly, create an empty [maven project](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html#creating-a-project), then create Page, Feature and Test folders and configure following paths
 * Feature directory path that includes feature files which are written in cherry language.<br/>Example : **/Users/username/projectFolder/featureFolder/**
 * Page directory path that includes auto-generated page classes.<br/>Example : **/Users/username/projectFolder/pageFolder/**
 * Test directory path that includes auto-generated test classes.<br/>Example : **/Users/username/projectFolder/testFolder/**
