@@ -27,7 +27,7 @@ You can create and generate your automation project code with cherry language.
 
 ### 1.0.0
 
-Initial release of Tomato
+Initial release of tomato
 
 -----------------------------------------------------------------------------------------------------------
 
