@@ -1,6 +1,6 @@
 # tomato README <img width="60px" height="60px" src="media/tomato-color.svg" />
 
-You can create your maven test automation project for mobile applications based on feature files which are written in [cherry](https://github.com/esg4aspl/SPL-AT-Gherkin-Extension/tree/master/SPL-AT-Gherkin "cherry")  language.
+tomato is a VSCode extension. You can create your maven test automation project for mobile applications based on feature files which are written in [cherry](https://github.com/esg4aspl/SPL-AT-Gherkin-Extension/tree/master/SPL-AT-Gherkin "cherry")  language.
 
 ## How to Configure Maven Project to Tomato
 You have to configure following paths
