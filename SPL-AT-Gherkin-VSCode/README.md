@@ -1,15 +1,17 @@
-# tomato README
+# tomato README <img width="60px" height="60px" src="media/tomato-color.svg" />
 
-![](media/tomato.svg | width=100 height=100)
-
-
-You can create your maven test automation project for mobile applications based on feature files which are written in cherry language. 
+tomato is a VSCode extension. You can create your maven test automation project for mobile applications based on feature files which are written in [cherry](https://github.com/esg4aspl/SPL-AT-Gherkin-Extension/tree/master/SPL-AT-Gherkin "cherry")  language.
 
 ## How to Configure Maven Project to Tomato
+You have to configure following paths
+* Feature directory path that includes feature files which are written in cherry language.<br/>Example : **/Users/username/projectFolder/featureFolder/**
+* Page directory path that includes auto-generated page classes.<br/>Example : **/Users/username/projectFolder/pageFolder/**
+* Test directory path that includes auto-generated test classes.<br/>Example : **/Users/username/projectFolder/testFolder/**
+* Directory of testng.xml path.<br/>Example : **/Users/username/projectFolder/testngXMLFolder/**
 
 ![](resources/gif/how_to_configure_tomato_2.gif)
 
-> Tip: Do not forget your project is maven
+> Tip: Do not forget set your project paths for Page, Test, Feature and XML files.
 
 ## Requirements
 
@@ -34,5 +36,3 @@ Initial release of Tomato
 Instagram Android 
 
 
-
-**Enjoy!**
