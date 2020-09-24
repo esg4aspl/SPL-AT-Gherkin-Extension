@@ -2,6 +2,9 @@
 
 cherry is a domain specific language which is typed Given-When-Then style like [Gherkin](https://cucumber.io/docs/gherkin/). 
 
+## What is the purpose of cherry language?
+Implemented test automation project is generated automatically with [tomato](https://github.com/esg4aspl/SPL-AT-Gherkin-Extension/tree/master/SPL-AT-Gherkin-VSCode "tomato") extension which understand cherry language. Generated codes are also implemented with [PageObject design pattern](https://martinfowler.com/bliki/PageObject.html "PageObject") and you can also access these implementations.
+
 ## How to use cherry language?
 Please check [wiki](https://github.com/esg4aspl/SPL-AT-Gherkin-Extension/wiki "cherry") page to understand language and its fatures in detail.
 
