@@ -1,4 +1,4 @@
-# tomato README <img width="60px" height="60px" src="media/tomato-color.svg" />
+# tomato README <img width="60px" height="60px" src="media/tomato-color.png" />
 
 tomato is a VSCode extension. You can create your maven test automation project for mobile applications based on feature files which are written in [cherry](https://github.com/esg4aspl/SPL-AT-Gherkin-Extension/tree/master/SPL-AT-Gherkin "cherry")  language.
 
@@ -29,7 +29,7 @@ Calling out known issues can help limit users opening duplicate issues against y
 
 You can create and generate your automation project code with cherry language. 
 
-### 1.0.0
+### 0.0.1
 
 Initial release of tomato
 

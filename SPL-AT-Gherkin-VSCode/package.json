@@ -3,6 +3,8 @@
 	"displayName": "tomato",
 	"description": "VSCode extension for tomato",
 	"version": "0.0.1",
+	"publisher": "sercansensulun",
+	"icon":"media/tomato-color.png",
 	"engines": {
 		"vscode": "^1.44.0"
 	},
@@ -160,5 +162,10 @@
 	},
 	"dependencies": {
 		"shelljs": "^0.8.4"
-	}
+	},
+	"repository": {
+	  "type": "git",
+	  "url": "https://github.com/esg4aspl/SPL-AT-Gherkin-Extension/tree/master/SPL-AT-Gherkin-VSCode"
+	},
+	"homepage": "https://github.com/esg4aspl/SPL-AT-Gherkin-Extension/blob/master/SPL-AT-Gherkin-VSCode/README.md"
 }
