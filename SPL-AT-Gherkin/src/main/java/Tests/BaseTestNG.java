@@ -26,11 +26,5 @@ public class BaseTestNG {
 	{
 		driver.quit();
 	}
-	
-	public void WaitForUI() throws InterruptedException{
-		synchronized (wait)
-		{
-			wait.wait(10000);
-		}
-	}
+
 }

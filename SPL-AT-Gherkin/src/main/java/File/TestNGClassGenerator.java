@@ -50,7 +50,7 @@ public class TestNGClassGenerator extends ClassFileGenerator{
 				+ "import io.appium.java_client.MobileElement;\n"
 				+ "import org.testng.annotations.BeforeClass; \n"
 				+ "import io.appium.java_client.android.AndroidDriver;"
-				+ ""
+				+ "\n"
 				+ "public class "+className+" extends BaseTestNG{"
 				+ "}";
 	}
@@ -213,15 +213,14 @@ public class TestNGClassGenerator extends ClassFileGenerator{
 		if (pageTagIdentifier != null) {
 			if (step.getKeyword().equals(GherkinStepConfiguration.THEN) || step.getKeyword().equals(GherkinStepConfiguration.AND)) {
 				if (tagFinder.findDolarSignTag(new Step[]{step}, TagConfiguration.MOVED_TAG) != null) {
-					return "\t\tWaitForUI(); \n"
-							+ "\t\tassertEquals(((AndroidDriver<MobileElement>) driver).currentActivity(),param);\n";	
+					return "\t\tassertEquals(((AndroidDriver<MobileElement>) driver).currentActivity(),param);\n";
 				}
 				if (tagFinder.findDolarSignTag(new Step[]{step}, TagConfiguration.OPENED_TAG) != null) {
-					return "\t\tWaitForUI();";
+					return "";
 				}
 			}
 			if (step.getKeyword().equals(GherkinStepConfiguration.GIVEN)) {
-				return "\t\tWaitForUI();";
+				return "";
 			}
 		}
 		return "";
@@ -262,13 +261,6 @@ public class TestNGClassGenerator extends ClassFileGenerator{
 				"\tpublic void teardown() \n" +
 				"\t{\n" +
 				"\t\tdriver.quit();\n" +
-				"\t}\n" +
-				"\t\n" +
-				"\tpublic void WaitForUI() throws InterruptedException{\n" +
-				"\t\tsynchronized (wait)\n" +
-				"\t\t{\n" +
-				"\t\t\twait.wait(10000);\n" +
-				"\t\t}\n" +
 				"\t}\n" +
 				"}";
 		try {
