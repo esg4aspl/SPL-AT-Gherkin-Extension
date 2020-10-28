@@ -17,6 +17,10 @@ Firstly, create an empty [maven project](https://maven.apache.org/guides/getting
 
 Your automation project should be created as maven project.
 
+## Example Projects created with Tomato
+
+* [Instagram Android Application](https://github.com/sercanparker/Cherry-Samples/tree/master/instagram-case-study)
+
 ## Known Issues
 
 Calling out known issues can help limit users opening duplicate issues against your extension.
@@ -31,8 +35,6 @@ Initial release of tomato
 
 -----------------------------------------------------------------------------------------------------------
 
-## Example Projects created with Tomato
 
-Instagram Android 
 
 
