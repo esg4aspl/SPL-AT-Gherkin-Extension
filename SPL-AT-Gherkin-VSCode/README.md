@@ -33,6 +33,9 @@ You can create and generate your automation project code with cherry language.
 
 Initial release of tomato
 
+## Attribute
+Icons made by [Smashicons](https://www.flaticon.com/authors/smashicons) from [www.flaticon.com](https://www.flaticon.com/)
+
 -----------------------------------------------------------------------------------------------------------
 
 
